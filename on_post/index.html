@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>OnPost</title>
+    <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.1.0/js/responsive.bootstrap.min.js"></script>
+	
+	<!-- <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase-app.js"></script> -->
+	<!-- <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase-auth.js"></script> -->
+	<!-- <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase-database.js"></script> -->
+  </head>
+  <body>
+	<div class="container">
+  
+  
+    <h1 style="text-align:center; font-weight: bold; font-size: 50px;margin-bottom: 40px">OnPost</h1>
+	<h2 style="margin-bottom: 20px">Current disasters</h2>
+	<table id="disasters" class="table table-striped table-bordered dataTable no-footer" width="100%"></table>
+	<h2 style="margin-top: 70px">Insert new disaster</h2>
+	<form class="form-inline" style="margin-top:20px">
+	  <div class="form-group">
+		<label for="exampleInputName2">Type</label>
+		<select id='type'  placeholder='Type' class="form-control" style="margin-right: 20px;"></select>
+	  </div>
+	  <div class="form-group">
+		<label for="exampleInputEmail2">Level</label>
+		<select id='level'  placeholder='Level' class="form-control"></select>
+	  </div>
+	</form>
+	<form class="form-inline" style="margin-top:30px">
+	  <div class="form-group">
+		<label for="exampleInputName2">Description</label>
+		<textarea type='text' id='description'  placeholder='Description' class="form-control" style="width: 550px;"></textarea>
+	  </div>
+	</form>
+   <form class="form-inline" style="margin-top: 30px">
+	  <div class="form-group">
+		<label for="exampleInputName2">Location</label>
+		<input type='text' id='location'  placeholder='Location' class="form-control" style="margin-right: 20px; width: 300px;"/>
+	  </div>
+	  <div class="form-group">
+		<label for="exampleInputEmail2">Radius</label>
+		<input type='text' id='radius'  placeholder='Radius' class="form-control"/>
+	  </div>
+	</form>
+	<form class="form-inline" style="margin-bottom: 30px;">
+		<button type="button" onclick="savedata()" class="btn btn-primary" style="margin-top: 20px;">Save</button>
+	</form>
+	
+	<div id="map" style="width:100%;height:500px"></div>
+	
+    
+    <br><br><br>
+    
+	</div>
+    <br><br><br>
+    <script>
+	var types = {
+		0 : "Flood",
+		1 : "Fire",
+		2 : "Attack",
+		3 : "Gas leak",
+		4 : "Earthquake",
+		5 : "Landslide",
+		6 : "Hail",
+		7 : "Chemical risk",
+		8 : "Radiation risk",
+	};
+	var levels = {
+		0 : "Green",
+		1 : "Yellow",
+		2 : "Orange",
+		3 : "Red",
+	};
+	var table = null;
+	$(document).ready(function() {
+		table = $('#disasters').DataTable( {
+			data: [],
+			columns: [
+				{ title: "Type",  dataProp: 'type', bSortable: false},
+				{ title: "Level", dataProp: 'level', bSortable: false},
+				{ title: "Description", dataProp: 'description', bSortable: false},
+				{ title: "Location",dataProp: 'location', bSortable: false},
+				{ title: "Radius",dataProp: 'radius', bSortable: false},
+				{ title: "Actions",dataProp: 'actions', bSortable: false}
+			]
+		} );
+	} );
+	
+	// Initialize Firebase
+	  var config = {
+		apiKey: "AIzaSyDt4Uw-TQBPR4zTMWESeTLnYmc1_NJ8OWg",
+		authDomain: "onpost-fc12e.firebaseapp.com",
+		databaseURL: "https://onpost-fc12e.firebaseio.com",
+		storageBucket: "onpost-fc12e.appspot.com",
+		messagingSenderId: "119457476716"
+	  };
+	  firebase.initializeApp(config);
+  
+	var firebaseDB = firebase.database().ref();
+				
+			
+	var data = [];
+    var userId = 0;
+	var auth = firebase.auth();
+	
+    // Log the user in with an email combination
+    auth.signInWithEmailAndPassword('rsdosev@gmail.com', 'nonclear').then(function(result) {
+	  // User signed in!
+	  var uid = result.user.uid;
+	}).catch(function(error) {
+	  // An error occurred
+	});
+	
+	auth.onAuthStateChanged(function(user) {
+	  if (user) {
+		// User signed in!
+		var uid = user.uid;
+	  } else {
+		// User logged out
+	  }
+	});
+	
+	var typesAsString = "";
+	for(var key in types) {
+		typesAsString += "<option value='" + key + "'>" + types[key] + "</option>";
+	}
+	$('#type').append(typesAsString);
+	var levelsAsString = "";
+	for(var key in levels) {
+		levelsAsString += "<option value='" + key + "'>" + levels[key] + "</option>";
+	}
+	$('#level').append(levelsAsString);
+
+    var typeInput = document.getElementById('type');
+	var levelInput = document.getElementById('level');
+	var descriptionInput = document.getElementById('description');
+	var locationInput = document.getElementById('location');
+	var radiusInput = document.getElementById('radius');
+	
+    var currentDisastersTable = document.getElementById('currentDisasters');
+
+    // Save data to firebase
+    function savedata(){
+
+	   var data = {
+		type: typeInput.value,
+		level: levelInput.value,
+		description: descriptionInput.value,
+		location: locationInput.value,
+		radius: radius.value
+	  };
+
+		  // Get a key for a new Post.
+		  var newDataKey = firebase.database().ref().child('disasters').push().key;
+
+		  // Write the new post's data simultaneously in the posts list and the user's post list.
+		  var updates = {};
+		  updates['/disasters/' + newDataKey] = data;
+		  //updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+		  firebase.database().ref().update(updates);
+		  
+		typeInput.value = '';
+		levelInput.value = '';
+		descriptionInput.value = '';
+		radiusInput.value = '';
+		locationInput.value = '';
+	}
+	var disasters = firebase.database().ref('disasters');
+	disasters.on('value', function(rows) {
+	  updateRows(rows);
+	});
+	
+	firebase.database().ref('disasters').once('value').then(function(rows) {
+		updateRows(rows);
+	});
+	
+	function updateRows(rows){
+			table.clear();
+			var c = 0;
+			for (var ob in rows.val()) {
+				data[c] = [];
+				data[c][0] = types[rows.val()[ob].type];
+				data[c][1] = levels[rows.val()[ob].level];
+				data[c][2] = rows.val()[ob].description;
+				data[c][3] = rows.val()[ob].location;
+				data[c][4] = rows.val()[ob].radius;
+				data[c][5] = '<button onclick="ondelete(\'' + ob +'\')" class="btn btn-default">Delete</button>';
+				c++;
+			}
+			table.rows.add(data);
+			table.draw();
+	}
+	
+	function ondelete(ob){
+		firebase.database().ref('disasters/' + ob).remove();
+		location.reload();
+	}
+	function myMap() {
+		var myLatlng = {lat: -25.363, lng: 131.044};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: myLatlng
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: 'Click to zoom'
+        });
+		var circle;
+		
+        map.addListener('center_changed', function() {
+          // 3 seconds after the center of the map has changed, pan back to the
+          // marker.
+          window.setTimeout(function() {
+            map.panTo(marker.getPosition());
+          }, 3000);
+        });
+
+        marker.addListener('click', function() {
+          map.setZoom(8);
+          map.setCenter(marker.getPosition());
+        });
+			
+		google.maps.event.addListener(map, 'click', function(event) {
+			placeMarker(event.latLng);
+		});
+
+		function placeMarker(location) {
+			if (circle) {
+			circle.setMap(null);
+			}
+			marker.setMap(null);
+			marker = new google.maps.Marker({
+				position: location, 
+				map: map,
+				title: 'The disaster is here!'
+			});
+			// Add circle overlay and bind to marker
+			circle = new google.maps.Circle({
+			  map: map,
+			  radius: parseInt(radiusInput.value),    // 10 miles in metres
+			  fillColor: '#AA0000'
+			});
+			circle.bindTo('center', marker, 'position');
+			locationInput.value = location;
+			
+			radiusInput.addEventListener('input', function()
+			{
+				placeMarker(location);
+			});
+		}
+	}
+    </script>
+	
+	<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+  </body>
+</html>
