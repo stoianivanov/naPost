@@ -14,6 +14,14 @@
 		9C664A761D9FAFDD00BDA17F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C664A741D9FAFDD00BDA17F /* LaunchScreen.storyboard */; };
 		9C664A811D9FAFDD00BDA17F /* OnPostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C664A801D9FAFDD00BDA17F /* OnPostTests.swift */; };
 		9C664A8C1D9FAFDD00BDA17F /* OnPostUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C664A8B1D9FAFDD00BDA17F /* OnPostUITests.swift */; };
+		BDFBEE701D9FB3C900A041D1 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFBEE6F1D9FB3C900A041D1 /* CustomNavigationBar.swift */; };
+		BDFBEE741D9FB4BC00A041D1 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDFBEE731D9FB4BC00A041D1 /* fontawesome-webfont.ttf */; };
+		BDFBEE771D9FB68100A041D1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFBEE761D9FB68100A041D1 /* Extensions.swift */; };
+		BDFBEE7A1D9FBFCA00A041D1 /* CustomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFBEE791D9FBFCA00A041D1 /* CustomVC.swift */; };
+		BDFBEE7C1D9FC10900A041D1 /* SideBarMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFBEE7B1D9FC10900A041D1 /* SideBarMenu.swift */; };
+		BDFBEE7F1D9FC3D400A041D1 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDFBEE7D1D9FC3D400A041D1 /* Roboto-Bold.ttf */; };
+		BDFBEE801D9FC3D400A041D1 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDFBEE7E1D9FC3D400A041D1 /* Roboto-Regular.ttf */; };
+		BDFBEE831D9FC63A00A041D1 /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFBEE821D9FC63A00A041D1 /* ReportVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +55,14 @@
 		9C664A871D9FAFDD00BDA17F /* OnPostUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnPostUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C664A8B1D9FAFDD00BDA17F /* OnPostUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnPostUITests.swift; sourceTree = "<group>"; };
 		9C664A8D1D9FAFDD00BDA17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDFBEE6F1D9FB3C900A041D1 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomNavigationBar.swift; path = OnPostUITests/CustomNavigationBar.swift; sourceTree = SOURCE_ROOT; };
+		BDFBEE731D9FB4BC00A041D1 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		BDFBEE761D9FB68100A041D1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BDFBEE791D9FBFCA00A041D1 /* CustomVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomVC.swift; sourceTree = "<group>"; };
+		BDFBEE7B1D9FC10900A041D1 /* SideBarMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarMenu.swift; sourceTree = "<group>"; };
+		BDFBEE7D1D9FC3D400A041D1 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		BDFBEE7E1D9FC3D400A041D1 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		BDFBEE821D9FC63A00A041D1 /* ReportVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +113,11 @@
 		9C664A6A1D9FAFDD00BDA17F /* OnPost */ = {
 			isa = PBXGroup;
 			children = (
+				BDFBEE811D9FC62800A041D1 /* Screens */,
+				BDFBEE751D9FB51900A041D1 /* CustomView */,
+				BDFBEE711D9FB44200A041D1 /* Fonts */,
 				9C664A6B1D9FAFDD00BDA17F /* AppDelegate.swift */,
-				9C664A6D1D9FAFDD00BDA17F /* ViewController.swift */,
+				BDFBEE761D9FB68100A041D1 /* Extensions.swift */,
 				9C664A6F1D9FAFDD00BDA17F /* Main.storyboard */,
 				9C664A721D9FAFDD00BDA17F /* Assets.xcassets */,
 				9C664A741D9FAFDD00BDA17F /* LaunchScreen.storyboard */,
@@ -123,6 +142,35 @@
 				9C664A8D1D9FAFDD00BDA17F /* Info.plist */,
 			);
 			path = OnPostUITests;
+			sourceTree = "<group>";
+		};
+		BDFBEE711D9FB44200A041D1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BDFBEE7D1D9FC3D400A041D1 /* Roboto-Bold.ttf */,
+				BDFBEE7E1D9FC3D400A041D1 /* Roboto-Regular.ttf */,
+				BDFBEE731D9FB4BC00A041D1 /* fontawesome-webfont.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		BDFBEE751D9FB51900A041D1 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				BDFBEE6F1D9FB3C900A041D1 /* CustomNavigationBar.swift */,
+				BDFBEE7B1D9FC10900A041D1 /* SideBarMenu.swift */,
+			);
+			name = CustomView;
+			sourceTree = "<group>";
+		};
+		BDFBEE811D9FC62800A041D1 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				9C664A6D1D9FAFDD00BDA17F /* ViewController.swift */,
+				BDFBEE821D9FC63A00A041D1 /* ReportVC.swift */,
+				BDFBEE791D9FBFCA00A041D1 /* CustomVC.swift */,
+			);
+			name = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,7 +280,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDFBEE801D9FC3D400A041D1 /* Roboto-Regular.ttf in Resources */,
 				9C664A761D9FAFDD00BDA17F /* LaunchScreen.storyboard in Resources */,
+				BDFBEE741D9FB4BC00A041D1 /* fontawesome-webfont.ttf in Resources */,
+				BDFBEE7F1D9FC3D400A041D1 /* Roboto-Bold.ttf in Resources */,
 				9C664A731D9FAFDD00BDA17F /* Assets.xcassets in Resources */,
 				9C664A711D9FAFDD00BDA17F /* Main.storyboard in Resources */,
 			);
@@ -259,8 +310,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDFBEE831D9FC63A00A041D1 /* ReportVC.swift in Sources */,
+				BDFBEE701D9FB3C900A041D1 /* CustomNavigationBar.swift in Sources */,
+				BDFBEE7C1D9FC10900A041D1 /* SideBarMenu.swift in Sources */,
+				BDFBEE7A1D9FBFCA00A041D1 /* CustomVC.swift in Sources */,
 				9C664A6E1D9FAFDD00BDA17F /* ViewController.swift in Sources */,
 				9C664A6C1D9FAFDD00BDA17F /* AppDelegate.swift in Sources */,
+				BDFBEE771D9FB68100A041D1 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +559,7 @@
 				9C664A921D9FAFDD00BDA17F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9C664A931D9FAFDD00BDA17F /* Build configuration list for PBXNativeTarget "OnPostTests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +568,7 @@
 				9C664A951D9FAFDD00BDA17F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9C664A961D9FAFDD00BDA17F /* Build configuration list for PBXNativeTarget "OnPostUITests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +577,7 @@
 				9C664A981D9FAFDD00BDA17F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
