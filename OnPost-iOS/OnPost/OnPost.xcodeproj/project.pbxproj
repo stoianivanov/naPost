@@ -16,6 +16,7 @@
 		9C664A811D9FAFDD00BDA17F /* OnPostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C664A801D9FAFDD00BDA17F /* OnPostTests.swift */; };
 		9C664A8C1D9FAFDD00BDA17F /* OnPostUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C664A8B1D9FAFDD00BDA17F /* OnPostUITests.swift */; };
 		BD2F866D1DA0105800EBE435 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD2F866C1DA0105800EBE435 /* GoogleService-Info.plist */; };
+		BD2F866F1DA0123500EBE435 /* DetailDisasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2F866E1DA0123500EBE435 /* DetailDisasterViewController.swift */; };
 		BDFBEE741D9FB4BC00A041D1 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDFBEE731D9FB4BC00A041D1 /* fontawesome-webfont.ttf */; };
 		BDFBEE771D9FB68100A041D1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFBEE761D9FB68100A041D1 /* Extensions.swift */; };
 		BDFBEE7A1D9FBFCA00A041D1 /* CustomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFBEE791D9FBFCA00A041D1 /* CustomVC.swift */; };
@@ -62,6 +63,7 @@
 		9C664A8B1D9FAFDD00BDA17F /* OnPostUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnPostUITests.swift; sourceTree = "<group>"; };
 		9C664A8D1D9FAFDD00BDA17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD2F866C1DA0105800EBE435 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BD2F866E1DA0123500EBE435 /* DetailDisasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailDisasterViewController.swift; sourceTree = "<group>"; };
 		BDFBEE731D9FB4BC00A041D1 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		BDFBEE761D9FB68100A041D1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BDFBEE791D9FBFCA00A041D1 /* CustomVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomVC.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				9C664A6D1D9FAFDD00BDA17F /* ViewController.swift */,
 				BDFBEE821D9FC63A00A041D1 /* ReportVC.swift */,
 				BDFBEE791D9FBFCA00A041D1 /* CustomVC.swift */,
+				BD2F866E1DA0123500EBE435 /* DetailDisasterViewController.swift */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				BDFBEE7A1D9FBFCA00A041D1 /* CustomVC.swift in Sources */,
 				BDFBEE851D9FC88E00A041D1 /* DisasterCell.swift in Sources */,
 				BDFBEE871D9FCAA900A041D1 /* CustomNavigationBar.swift in Sources */,
+				BD2F866F1DA0123500EBE435 /* DetailDisasterViewController.swift in Sources */,
 				9C664A6E1D9FAFDD00BDA17F /* ViewController.swift in Sources */,
 				9C664A6C1D9FAFDD00BDA17F /* AppDelegate.swift in Sources */,
 				BDFBEE771D9FB68100A041D1 /* Extensions.swift in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vn3-xx-eER">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0uj-MN-6Lj">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -25,10 +25,27 @@
             </objects>
             <point key="canvasLocation" x="-177" y="-600"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ufM-eb-ui2">
+            <objects>
+                <navigationController id="0uj-MN-6Lj" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wPr-HB-pZe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vn3-xx-eER" kind="relationship" relationship="rootViewController" id="UAy-G8-Inr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kbV-M7-eId" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2025" y="-2"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="VN8-02-jTe">
             <objects>
                 <tabBarController id="vn3-xx-eER" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="aId-Ot-f4e"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="9sU-Qv-Dju">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

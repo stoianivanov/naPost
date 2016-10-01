@@ -7,21 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
-class ViewController: CustomVC, UITableViewDataSource, UITableViewDelegate{
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     let DISASTER_CELL = "DisasterCell"
     
-    let disasters: [Disaster] = [ Disaster(type: .flood),
-                                  Disaster(type: .fire),
-                                  Disaster(type: .gasLeak),
-                                  Disaster(type: .attack),
-                                  Disaster(type: .flood),
-                                  Disaster(type: .fire),
-                                  Disaster(type: .attack),
-                                  Disaster(type: .gasLeak)]
-    
-    
+    var disasters : [Disaster] = []
+
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.rowHeight = UITableViewAutomaticDimension
@@ -42,6 +35,14 @@ class ViewController: CustomVC, UITableViewDataSource, UITableViewDelegate{
         view.addConstraintsWithFormat("H:|[v0]|", views: tableView)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.title = "OnPost"
+        
+        loadDisasters()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -54,6 +55,7 @@ class ViewController: CustomVC, UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return disasters.count
+        
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -66,5 +68,32 @@ class ViewController: CustomVC, UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let disaster = disasters[indexPath.item]
+        let detailDisaster = DetailDisasterViewController()
+//        detailDisaster.currentDisaster = disaster
+        navigationController?.pushViewController(detailDisaster, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
+    func loadDisasters(){
+        FIRDatabase.database().reference().child("disasters").observe(.childAdded, with: {
+            (snapshot) in
+            
+            if let dict = snapshot.value as? NSDictionary{
+                print(snapshot)
+                let newDisaster = Disaster(dict: dict)
+                if newDisaster != nil{
+                    self.disasters.append(newDisaster!)
+                    self.tableView.reloadData()
+                }
+            }
+            
+            }, withCancel: {
+                (error) in
+                print(error)
+        })
+    }
 }
 

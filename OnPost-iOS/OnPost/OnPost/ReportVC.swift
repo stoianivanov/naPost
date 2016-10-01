@@ -8,6 +8,6 @@
 
 import UIKit
 
-class ReportVC: CustomVC {
+class ReportVC: UIViewController {
 
 }

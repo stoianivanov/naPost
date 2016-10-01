@@ -19,10 +19,28 @@ enum DisasterType{
 class Disaster {
     
     var disasterType: DisasterType
+    var radius: Int = 1000
+    var location: (Double, Double)
+    var description: String
     
-    init(type: DisasterType){
-        self.disasterType = type
+    init?(dict: NSDictionary){
+        guard
+            let disasterDescription = dict["description"] as? String,
+            let disLevel = Int((dict["level"] as? String)!),
+            let disRadius = Int((dict["radius"] as? String)!),
+            let type = Int((dict["type"] as? String)!),
+            let disLoc = dict["location"] as? String
+        else {
+            return nil
+        }
+        
+        description = disasterDescription
+        disasterType = .flood
+        radius = disRadius
+        location = (0, 0)
+        splitLocation(location: disLoc)
     }
+    
     
     func getTitleForType() -> String{
         switch disasterType{
@@ -63,5 +81,23 @@ class Disaster {
             case .gasLeak:
                 return "Внимание! Има получен сигнал за изтичане на газ в този район. Изключетете централното електричество и спрете локалното газоподаване. Предприемете действия за незабавна евакуция на безпасно място."
         }
+    }
+    
+    private func splitLocation(location: String){
+        let charSet = CharacterSet(charactersIn: ", ()")
+        let points = location.components(separatedBy: charSet)
+        var tempArr: [String] = []
+        for item in points{
+            if !item.isEmpty{
+                tempArr.append(item)
+            }
+        }
+        print(tempArr)
+
+        let firstValue  = Double(tempArr[0])!
+        let secondValue = Double(tempArr[1])!
+        
+        self.location.0 = firstValue
+        self.location.1 = secondValue
     }
 }
