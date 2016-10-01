@@ -10,7 +10,7 @@ import UIKit
 
 class CustomVC: UIViewController{
     
-    lazy var navBar: CustomNavigationBar = {
+    let navBar: CustomNavigationBar = {
         let bar = CustomNavigationBar()
         bar.translatesAutoresizingMaskIntoConstraints = false
         return bar
@@ -19,6 +19,7 @@ class CustomVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        navBar.backgroundColor = .white
         
         self.view.addSubview(navBar)
         self.view.addConstraintsWithFormat("H:|[v0]|", views: navBar)

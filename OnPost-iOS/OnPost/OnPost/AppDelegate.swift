@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FIRApp.configure()
+
+        FIRDatabase.database().reference().child("disasters").observe(.childAdded, with: {
+                (snapshot) in
+            if let dict = snapshot.value as? [String: AnyObject]{
+                DispatchQueue.main.sync {
+                    print(dict)
+                }
+            }
+            }, withCancel: {
+                (error) in
+                print(error)
+        })
+        
+        let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+        statusBar.backgroundColor = UIColor(r: 249, g: 249, b: 249, alpha: 1)
+        
         return true
     }
 

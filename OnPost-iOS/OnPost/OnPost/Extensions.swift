@@ -28,4 +28,8 @@ extension UIColor{
     convenience init(r: CGFloat, g: CGFloat, b: CGFloat, alpha: CGFloat){
         self.init(red: r/255, green: g/255, blue: b/255, alpha: alpha)
     }
+    
+    convenience init(netHex:Int) {
+        self.init(red:CGFloat((netHex >> 16) & 0xff), green:CGFloat((netHex >> 8) & 0xff), blue: CGFloat(netHex & 0xff), alpha: 1)
+    }
 }

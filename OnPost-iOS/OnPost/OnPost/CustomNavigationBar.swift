@@ -30,6 +30,7 @@ class CustomNavigationBar: UINavigationBar{
     
     
     func setupBar(){
+        backgroundColor = UIColor(r: 255, g: 255, b: 255, alpha: 1)
         addSubview(titleLabel)
         self.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
         self.addConstraintsWithFormat("H:|[v0]|", views: titleLabel)
