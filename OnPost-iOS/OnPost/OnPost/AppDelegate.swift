@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
         statusBar.backgroundColor = UIColor(r: 249, g: 249, b: 249, alpha: 1)
+        
+        let center = UNUserNotificationCenter.current()
+        let action = UNNotificationAction(identifier: "replyIdentifier", title: "reply")
+        let category = UNNotificationCategory(identifier: "catgeoryIdentifier", actions: [action], intentIdentifiers: [])
+        center.setNotificationCategories([category])
+        center.requestAuthorization(options: [.badge, .alert , .sound]) { (greanted, error) in
+            print(error)
+        }
         
         return true
     }

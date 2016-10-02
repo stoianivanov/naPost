@@ -8,8 +8,11 @@
 
 import UIKit
 import Firebase
+import UserNotifications
+import UserNotificationsUI
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CustomNavBarDelegate{
+
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CustomNavBarDelegate, UNUserNotificationCenterDelegate{
     
     let DISASTER_CELL = "DisasterCell"
     
@@ -33,6 +36,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return table
     }()
     
+    lazy var testButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(notification), for: .touchUpInside)
+        button.setTitle("Test it", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -42,17 +54,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         view.addConstraintsWithFormat("H:|[v0]|", views: tableView)
         
         view.addSubview(navBar)
-        view.addConstraintsWithFormat("V:|-20-[v0(44)][v1]|", views: navBar, tableView)
+        view.addSubview(testButton)
+        view.addConstraintsWithFormat("V:|-20-[v0(44)][v1][v2(20)]|", views: navBar, tableView, testButton)
         view.addConstraintsWithFormat("H:|[v0]|", views: navBar)
+        view.addConstraintsWithFormat("H:|[v0]|", views: testButton)
         loadDisasters()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         navigationController?.title = "OnPost"
-        
-//        loadDisasters()
     }
     
     override func didReceiveMemoryWarning() {
@@ -113,5 +124,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let report = ReportVC()
         navigationController?.pushViewController(report, animated: true)
     }
+    
+    func notification() {
+        let content = NotificationContent(title: "Disaster", subTitle: "Fire", body: "Rila Mountain")
+        content.categoryIdentifier = Consts.categoryIdentifier
+        let request = UNNotificationRequest(identifier: Consts.requestIdentifier, content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request) { error in
+            UNUserNotificationCenter.current().delegate = self
+            if (error != nil){
+                //handle here
+            }
+        }
+    }
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Swift.Void) {
+        completionHandler( [.alert, .badge, .sound])
+    }
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
+        print("Tapped in notification")
+    }
 }
+
+
 

@@ -160,9 +160,7 @@ class ReportVC: CustomVC, UIPickerViewDelegate, UIPickerViewDataSource, CLLocati
         else {
             let alert = UIAlertController(title: "Error", message: "Pin missing", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default) { (alert: UIAlertAction!) -> Void in
-           
-                NSLog("You pressed button OK")
-            }
+           }
             alert.addAction(defaultAction)
             present(alert, animated: true, completion: nil)
         }

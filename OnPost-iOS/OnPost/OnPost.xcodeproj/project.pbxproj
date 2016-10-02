@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		53919E43D6F2BC2218667FA7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD6E0A4D10D9EB285A5BD9 /* libPods.a */; };
+		9C47D0431DA12254009CDB04 /* NotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47D0421DA12254009CDB04 /* NotificationContent.swift */; };
+		9C47D0451DA122ED009CDB04 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47D0441DA122ED009CDB04 /* Helper.swift */; };
 		9C664A6C1D9FAFDD00BDA17F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C664A6B1D9FAFDD00BDA17F /* AppDelegate.swift */; };
 		9C664A6E1D9FAFDD00BDA17F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C664A6D1D9FAFDD00BDA17F /* ViewController.swift */; };
 		9C664A711D9FAFDD00BDA17F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C664A6F1D9FAFDD00BDA17F /* Main.storyboard */; };
@@ -49,6 +51,8 @@
 /* Begin PBXFileReference section */
 		7BBD6E0A4D10D9EB285A5BD9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCA871FFA24D6E5687B8236 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9C47D0421DA12254009CDB04 /* NotificationContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationContent.swift; sourceTree = "<group>"; };
+		9C47D0441DA122ED009CDB04 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		9C664A681D9FAFDD00BDA17F /* OnPost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnPost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C664A6B1D9FAFDD00BDA17F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C664A6D1D9FAFDD00BDA17F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 			isa = PBXGroup;
 			children = (
 				BDFBEE891D9FDF4B00A041D1 /* Disaster.swift */,
+				9C47D0421DA12254009CDB04 /* NotificationContent.swift */,
+				9C47D0441DA122ED009CDB04 /* Helper.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -418,6 +424,7 @@
 				BDFBEE831D9FC63A00A041D1 /* ReportVC.swift in Sources */,
 				BDFBEE7C1D9FC10900A041D1 /* SideBarMenu.swift in Sources */,
 				BDFBEE8A1D9FDF4B00A041D1 /* Disaster.swift in Sources */,
+				9C47D0431DA12254009CDB04 /* NotificationContent.swift in Sources */,
 				BDFBEE7A1D9FBFCA00A041D1 /* CustomVC.swift in Sources */,
 				BDFBEE851D9FC88E00A041D1 /* DisasterCell.swift in Sources */,
 				BDFBEE871D9FCAA900A041D1 /* CustomNavigationBar.swift in Sources */,
@@ -425,6 +432,7 @@
 				9C664A6E1D9FAFDD00BDA17F /* ViewController.swift in Sources */,
 				9C664A6C1D9FAFDD00BDA17F /* AppDelegate.swift in Sources */,
 				BDFBEE771D9FB68100A041D1 /* Extensions.swift in Sources */,
+				9C47D0451DA122ED009CDB04 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
