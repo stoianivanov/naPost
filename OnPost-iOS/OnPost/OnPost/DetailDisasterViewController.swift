@@ -57,7 +57,7 @@ class DetailDisasterViewController: UIViewController, MKMapViewDelegate{
             let clLocation = CLLocationCoordinate2D(latitude: 46.7667, longitude: 23.58)
             print(currentDisaster?.location)
             
-            descriptionLabel.text = currentDisaster?.description
+            descriptionLabel.text = currentDisaster?.descriptionText
             levelView.backgroundColor = currentDisaster?.getLevelColor()
             centerMapOnLocation(location: clLocation)
         }
@@ -70,7 +70,7 @@ class DetailDisasterViewController: UIViewController, MKMapViewDelegate{
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        let clLocation = CLLocationCoordinate2D(latitude: (currentDisaster?.location.0)!, longitude: (currentDisaster?.location.1)!)
+        let clLocation = CLLocationCoordinate2D(latitude: (currentDisaster?.location?.0)!, longitude: (currentDisaster?.location?.1)!)
         let region = MKCoordinateRegionMakeWithDistance(
             clLocation, 0.05, 0.05)
         

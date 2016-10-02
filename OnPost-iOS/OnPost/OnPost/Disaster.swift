@@ -24,10 +24,10 @@ enum DisasterType{
 
 class Disaster {
     
-    var disasterType: DisasterType
+    var disasterType: DisasterType?
     var radius: Int = 1000
-    var location: (Double, Double)
-    var description: String
+    var location: (Double, Double)?
+    var descriptionText: String
     var level: Int
     
     init?(dict: NSDictionary){
@@ -41,17 +41,50 @@ class Disaster {
             return nil
         }
         
-        description = disasterDescription
-        disasterType = .flood
+        descriptionText = disasterDescription
+        
         level = disLevel
         radius = disRadius
         location = (0, 0)
+        
         splitLocation(location: disLoc)
+        self.disasterType = setTitleForType(type: type)
+        
+        
     }
     
+    func setTitleForType(type: Int) -> DisasterType{
+        switch type{
+            case 0:
+                return .flood
+            case 1:
+                return .fire
+            case 2:
+                return .attack
+            case 3:
+                return .gasLeak
+            case 4:
+                return .earthquake
+            case 5:
+                return .landslide
+            case 6:
+                return .hail
+            case 7:
+                return .chemicalRisk
+            case 8:
+                return .radiationRisk
+            default:
+                return .flood
+        }
+    }
     
-    func getTitleForType() -> String{
-        switch disasterType{
+    func getTitleForType() -> String?{
+        guard
+            let validDisaster = disasterType
+            else{
+                return nil
+        }
+        switch validDisaster{
             case .flood:
                 return "Flood"
             case .fire:
@@ -74,7 +107,7 @@ class Disaster {
     }
     
     func getLevelColor() -> UIColor {
-        let colorLevels: [UIColor] = [.red, .orange, .yellow, .green]
+        let colorLevels: [UIColor] = [.green, .yellow, .orange, .red]
         return colorLevels[level]
     }
 
@@ -91,8 +124,9 @@ class Disaster {
 //        }
 //    }
     
-    func descriptionForType() -> String{
-        switch disasterType {
+    func descriptionForType() -> String?{
+        if let unwarpTyped = disasterType {
+        switch unwarpTyped {
             case .flood:
                 return "Attention! There is flooding in this region. Take action for immediate evacuation to a higher point."
             case .fire:
@@ -103,17 +137,24 @@ class Disaster {
             
             case .gasLeak:
                 return "Attention! There is a gas leak in the area. Turn off the central electricity and stop the local gas supply. Take action for immediate evacuation to a safe location."
+            
             case .chemicalRisk:
                 return "Attention! There is a chemical risk in this area. Take action for immediate evacuation to a safe location."
+            
             case .earthquake:
                 return "Attention! An earthquake in this region. Turn off the central electricity and stop the local gas supply. Take action for immediate evacuation to a safe location. Use only stairs."
+            
             case .hail:
                 return "Attention! There is a hail in this area. Take action for immediate evacuation to a safe location."
+            
             case .landslide:
                 return "Attention! There is a landslide in this area. Take action for immediate evacuation to a safe location."
+            
             case .radiationRisk:
                 return "Attention! There is a radiation risk in this area. Take action for immediate evacuation to a safe location."
+            }
         }
+        return nil
     }
     
     private func splitLocation(location: String){
@@ -130,7 +171,7 @@ class Disaster {
         let firstValue  = Double(tempArr[0])!
         let secondValue = Double(tempArr[1])!
         
-        self.location.0 = firstValue
-        self.location.1 = secondValue
+        self.location?.0 = firstValue
+        self.location?.1 = secondValue
     }
 }
