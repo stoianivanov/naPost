@@ -69,9 +69,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let disaster = disasters[indexPath.item]
+        let disaster = disasters[indexPath.item]
         let detailDisaster = DetailDisasterViewController()
-//        detailDisaster.currentDisaster = disaster
+        detailDisaster.currentDisaster = disaster
+        
+//        self.navigationItem.backBarButtonItem?.title = "Назад"
         navigationController?.pushViewController(detailDisaster, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

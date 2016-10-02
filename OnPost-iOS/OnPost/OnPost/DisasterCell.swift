@@ -19,8 +19,8 @@ class DisasterCell: UITableViewCell{
             
             cellTitle.text = unwarpDisaster.getTitleForType()
             descriptionLabel.text = unwarpDisaster.descriptionForType()
-            let colorCode = unwarpDisaster.colorForDisasterType()
-            disasterImageLabel.textColor = UIColor(netHex: colorCode)
+            
+            disasterImageLabel.textColor = unwarpDisaster.getLevelColor()
         }
     }
     
