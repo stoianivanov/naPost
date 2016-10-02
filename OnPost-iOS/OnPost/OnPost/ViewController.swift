@@ -84,6 +84,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let disaster = disasters[indexPath.item]
         let detailDisaster = DetailDisasterViewController()
         detailDisaster.currentDisaster = disaster
+
         navigationController?.pushViewController(detailDisaster, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

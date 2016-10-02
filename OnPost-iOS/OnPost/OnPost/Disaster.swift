@@ -7,21 +7,28 @@
 //
 
 import Foundation
+import UIKit
 
 enum DisasterType{
     case flood
     case fire
     case gasLeak
     case attack
+    case chemicalRisk
+    case earthquake
+    case hail
+    case landslide
+    case radiationRisk
 
 }
 
 class Disaster {
     
-    var disasterType: DisasterType
+    var disasterType: DisasterType?
     var radius: Int = 1000
-    var location: (Double, Double)
-    var description: String
+    var location: (Double, Double)?
+    var descriptionText: String
+    var level: Int
     
     init?(dict: NSDictionary){
         guard
@@ -34,53 +41,120 @@ class Disaster {
             return nil
         }
         
-        description = disasterDescription
-        disasterType = .flood
+        descriptionText = disasterDescription
+        
+        level = disLevel
         radius = disRadius
         location = (0, 0)
+        
         splitLocation(location: disLoc)
+        self.disasterType = setTitleForType(type: type)
+        
+        
     }
     
-    
-    func getTitleForType() -> String{
-        switch disasterType{
-            case .flood:
-                return "НАВОДНЕНИЕ"
-            case .fire:
-                return "ПОЖАР"
-            case .attack:
-                return "АТЕНТАТ"
-            case .gasLeak:
-                return "ИЗТИЧАНЕ НА ГАЗ"
+    func setTitleForType(type: Int) -> DisasterType{
+        switch type{
+            case 0:
+                return .flood
+            case 1:
+                return .fire
+            case 2:
+                return .attack
+            case 3:
+                return .gasLeak
+            case 4:
+                return .earthquake
+            case 5:
+                return .landslide
+            case 6:
+                return .hail
+            case 7:
+                return .chemicalRisk
+            case 8:
+                return .radiationRisk
+            default:
+                return .flood
         }
+    }
+    
+    func getTitleForType() -> String?{
+        guard
+            let validDisaster = disasterType
+            else{
+                return nil
+        }
+        switch validDisaster{
+            case .flood:
+                return "Flood"
+            case .fire:
+                return "Fire"
+            case .attack:
+                return "Attack"
+            case .gasLeak:
+                return "Gas Leak"
+            case .chemicalRisk:
+                return "Chemical Risk"
+            case .earthquake:
+                return "Earthquake"
+            case .hail:
+                return "Hail"
+            case .landslide:
+                return "Landslide"
+            case .radiationRisk:
+                return "Radiation Risk"
+        }
+    }
+    
+    func getLevelColor() -> UIColor {
+        let colorLevels: [UIColor] = [.green, .yellow, .orange, .red]
+        return colorLevels[level]
     }
 
-    func colorForDisasterType() -> Int{
-        switch disasterType {
-            case .flood:
-                return 0x0000FF
-            case .fire:
-                return 0xFF0000
-            case .attack:
-                return 0xFFFF00
-            case .gasLeak:
-                return 0x008800
-        }
-    }
+//    func colorForDisasterType() -> Int{
+//        switch disasterType {
+//            case .flood:
+//                return 0x0000FF
+//            case .fire:
+//                return 0xFF0000
+//            case .attack:
+//                return 0xFFFF00
+//            case .gasLeak:
+//                return 0x008800
+//        }
+//    }
     
-    func descriptionForType() -> String{
-        switch disasterType {
+    func descriptionForType() -> String?{
+        if let unwarpTyped = disasterType {
+        switch unwarpTyped {
             case .flood:
-                return "Внимание! Има получен сигнал за наводнения в този район. Предприемете действия за незабавна евакуция на по-висока точка. "
+                return "Attention! There is flooding in this region. Take action for immediate evacuation to a higher point."
             case .fire:
-                return "Внимание! Има получен сигнал за пожар в този район. Предприемете действия за незабавна евакуция на безпасно място."
+                return "Attention! There is fire in this area. Take action for immediate evacuation to a safe location .."
             
             case .attack:
-                return "Внимание! Има получен сигнал за атенат в този район. Предприемете действия за незабавна евакуция на безпасно място."
+                return "Attention! There is a terrorist attack in this area. Take action for immediate evacuation to a safe location."
             
             case .gasLeak:
-                return "Внимание! Има получен сигнал за изтичане на газ в този район. Изключетете централното електричество и спрете локалното газоподаване. Предприемете действия за незабавна евакуция на безпасно място."
+                return "Attention! There is a gas leak in the area. Turn off the central electricity and stop the local gas supply. Take action for immediate evacuation to a safe location."
+            
+            case .chemicalRisk:
+                return "Attention! There is a chemical risk in this area. Take action for immediate evacuation to a safe location."
+            
+            case .earthquake:
+                return "Attention! An earthquake in this region. Turn off the central electricity and stop the local gas supply. Take action for immediate evacuation to a safe location. Use only stairs."
+            
+            case .hail:
+                return "Attention! There is a hail in this area. Take action for immediate evacuation to a safe location."
+            
+            case .landslide:
+                return "Attention! There is a landslide in this area. Take action for immediate evacuation to a safe location."
+            
+            case .radiationRisk:
+                return "Attention! There is a radiation risk in this area. Take action for immediate evacuation to a safe location."
+            }
         }
+        return nil
     }
     
     private func splitLocation(location: String){
@@ -97,7 +171,7 @@ class Disaster {
         let firstValue  = Double(tempArr[0])!
         let secondValue = Double(tempArr[1])!
         
-        self.location.0 = firstValue
-        self.location.1 = secondValue
+        self.location?.0 = firstValue
+        self.location?.1 = secondValue
     }
 }
