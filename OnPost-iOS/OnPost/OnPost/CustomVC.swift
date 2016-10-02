@@ -8,10 +8,12 @@
 
 import UIKit
 
-class CustomVC: UIViewController{
+class CustomVC: UIViewController, BackNavBarDelegate, CustomNavBarDelegate{
     
-    let navBar: CustomNavigationBar = {
-        let bar = CustomNavigationBar()
+    lazy var navBar: BackNavBar = {
+        let bar = BackNavBar()
+        bar.dataSource = self
+        bar.navBarDelegate = self
         bar.translatesAutoresizingMaskIntoConstraints = false
         return bar
     }()
@@ -32,5 +34,13 @@ class CustomVC: UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    func backAction(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func reportAction() {
+        let report = ReportVC()
+        navigationController?.pushViewController(report, animated: true)
+    }
 
 }

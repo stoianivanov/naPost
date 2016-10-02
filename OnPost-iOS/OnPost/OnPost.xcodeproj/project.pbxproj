@@ -296,6 +296,7 @@
 				TargetAttributes = {
 					9C664A671D9FAFDD00BDA17F = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = PXEG9GD6UJ;
 						ProvisioningStyle = Automatic;
 					};
 					9C664A7B1D9FAFDD00BDA17F = {
@@ -574,6 +575,7 @@
 			baseConfigurationReference = CC42663069B90AD8A1DD6097 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PXEG9GD6UJ;
 				INFOPLIST_FILE = OnPost/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = MG.OnPost;
@@ -587,6 +589,7 @@
 			baseConfigurationReference = 8BCA871FFA24D6E5687B8236 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PXEG9GD6UJ;
 				INFOPLIST_FILE = OnPost/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = MG.OnPost;

@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class DetailDisasterViewController: UIViewController, MKMapViewDelegate{
+class DetailDisasterViewController: CustomVC, MKMapViewDelegate{
 
     var currentDisaster: Disaster? = nil
     let regionRadius: CLLocationDistance = 1000
@@ -27,8 +27,10 @@ class DetailDisasterViewController: UIViewController, MKMapViewDelegate{
     
         self.view.addSubview(mapKit)
         self.view.addConstraintsWithFormat("H:|-8-[v0]-8-|", views: mapKit)
-        self.view.addConstraintsWithFormat("V:|[v0]-8-|", views: mapKit)
+//        self.view.addConstraintsWithFormat("V:|-64-[v0]-8-|", views: mapKit)
         
+        self.view.addConstraint(NSLayoutConstraint(item: mapKit, attribute: .top, relatedBy: .equal, toItem: navBar, attribute: .bottom, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: mapKit, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 8))
         fetchDisaster()
     }
     
@@ -44,17 +46,11 @@ class DetailDisasterViewController: UIViewController, MKMapViewDelegate{
     
     func centerMapOnLocation(location: CLLocationCoordinate2D) {
         let region = MKCoordinateRegionMakeWithDistance(
-            location, 0.05, 0.05)
+            location, 2000, 2000)
         mapKit.setRegion(region, animated: true)
     }
     
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        let clLocation = CLLocationCoordinate2D(latitude: (currentDisaster?.location.0)!, longitude: (currentDisaster?.location.1)!)
-        let region = MKCoordinateRegionMakeWithDistance(
-            clLocation, 0.05, 0.05)
-        
-        mapKit.setRegion(region, animated: true)
-    }
+    
     
     
     
