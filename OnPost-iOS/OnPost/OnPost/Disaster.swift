@@ -44,7 +44,7 @@ class Disaster {
         }
         
         descriptionText = disasterDescription
-        
+        location = (0, 0)
         level = disLevel
         radius = disRadius
 //        approved = isApproved
