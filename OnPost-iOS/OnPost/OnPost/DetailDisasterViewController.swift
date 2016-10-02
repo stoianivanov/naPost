@@ -14,6 +14,12 @@ class DetailDisasterViewController: UIViewController, MKMapViewDelegate{
     var currentDisaster: Disaster? = nil
     let regionRadius: CLLocationDistance = 1000
     
+//    let disasterImageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        return imageView
+//    }()
+    
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -39,12 +45,15 @@ class DetailDisasterViewController: UIViewController, MKMapViewDelegate{
         
         self.view.backgroundColor = .white
         
+//        self.view.addSubview(disasterImageView)
         self.view.addSubview(descriptionLabel)
         self.view.addSubview(levelView)
         self.view.addSubview(mapKit)
         
+//        self.view.addConstraintsWithFormat("H:|-8-[v0]-10-[v1]|", views: disasterImageView, descriptionLabel)
+//        self.view.addConstraintsWithFormat("V:|-8-[v0]-8-|", views: disasterImageView)
         self.view.addConstraintsWithFormat("H:|-8-[v0]-8-|", views: descriptionLabel)
-        self.view.addConstraintsWithFormat("H:|-8-[v0(10)]|", views: levelView)
+        self.view.addConstraintsWithFormat("H:|-8-[v0(25)]|", views: levelView)
         self.view.addConstraintsWithFormat("H:|-8-[v0]-8-|", views: mapKit)
         self.view.addConstraintsWithFormat("V:|-72-[v0]-8-[v1(10)]-8-[v2]-8-|", views: descriptionLabel, levelView, mapKit)
         
@@ -53,9 +62,13 @@ class DetailDisasterViewController: UIViewController, MKMapViewDelegate{
     
     func fetchDisaster(){
         if currentDisaster != nil {
+//            self.title = "Details"
             self.title = currentDisaster?.getTitleForType()
             let clLocation = CLLocationCoordinate2D(latitude: 46.7667, longitude: 23.58)
             print(currentDisaster?.location)
+            
+//            let image = UIImage(named: (currentDisaster?.getTitleForType())!)
+//            disasterImageView.image = image
             
             descriptionLabel.text = currentDisaster?.descriptionText
             levelView.backgroundColor = currentDisaster?.getLevelColor()
