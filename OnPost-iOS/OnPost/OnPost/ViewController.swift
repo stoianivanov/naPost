@@ -85,13 +85,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let detailDisaster = DetailDisasterViewController()
         detailDisaster.currentDisaster = disaster
 
-        navigationController?.pushViewController(detailDisaster, animated: true)
+         navigationController?.pushViewController(detailDisaster, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
     func loadDisasters(){
-        FIRDatabase.database().reference().child("disasters").observe(.childAdded, with: {
+        
+//        ref.queryOrderedByChild("height").queryEqualToValue(25)
+//            .observeEventType(.ChildAdded, withBlock
+        
+        
+        FIRDatabase.database().reference().child("disasters").queryOrdered(byChild: "approved").queryEqual(toValue: 1).observe(.childAdded, with: {
                 (snapshot) in
             if let dict = snapshot.value as? NSDictionary{
                 print(snapshot)
@@ -99,6 +104,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 if newDisaster != nil{
                     self.disasters.append(newDisaster!)
                     self.tableView.reloadData()
+                
                 }
             }
             

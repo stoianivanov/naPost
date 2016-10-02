@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-
+import Firebase
 
 class ReportVC: CustomVC, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate{
 
@@ -51,7 +51,10 @@ class ReportVC: CustomVC, UIPickerViewDelegate, UIPickerViewDataSource, CLLocati
         return map
     }()
     
-     var locationManager: CLLocationManager = CLLocationManager()
+    var locationManager: CLLocationManager = CLLocationManager()
+    var mapKitAnnotation: MKPointAnnotation? = nil
+    var selectedTypeIndex: Int = 0
+    var selectedDangerIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +86,25 @@ class ReportVC: CustomVC, UIPickerViewDelegate, UIPickerViewDataSource, CLLocati
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.mapKit.showsUserLocation = true
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(action))
+        longPress.minimumPressDuration = 1.0
+        mapKit.addGestureRecognizer(longPress)
+
+    }
+    
+    func action(gestureRecognizer:UIGestureRecognizer) {
+        let touchPoint = gestureRecognizer.location(in: self.mapKit)
+        let newCoord:CLLocationCoordinate2D = mapKit.convert(touchPoint, toCoordinateFrom: self.mapKit)
+        
+        let newAnotation = MKPointAnnotation()
+        newAnotation.coordinate = newCoord
+        
+        if mapKitAnnotation != nil{
+            mapKit.removeAnnotation(mapKitAnnotation!)
+        }
+        mapKit.addAnnotation(newAnotation)
+        mapKitAnnotation = newAnotation
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
@@ -112,8 +134,27 @@ class ReportVC: CustomVC, UIPickerViewDelegate, UIPickerViewDataSource, CLLocati
         return disasterComplex[component][row]
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(disasterComplex[0][row])
+        print(disasterComplex[1][component])
+        selectedTypeIndex = component
+        selectedDangerIndex = row
+    }
+    
     override func reportAction() {
-        print("asd")
+        let ref = FIRDatabase.database().reference().child("disasters")
+        let childRef = ref.childByAutoId()
+        
+        let values: [String: Any] = [
+            "type": self.selectedTypeIndex,
+            "level": self.selectedDangerIndex,
+            "description": descriptionField.text,
+            "radius": 500,
+            "location": "(\((mapKitAnnotation?.coordinate.latitude)!), \((mapKitAnnotation?.coordinate.longitude)!))",
+            "approved": 0
+        ]
+    
+        childRef.updateChildValues(values)
     }
     
 }
