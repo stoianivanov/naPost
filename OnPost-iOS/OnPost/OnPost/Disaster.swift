@@ -29,6 +29,7 @@ class Disaster {
     var location: (Double, Double)?
     var descriptionText: String
     var level: Int
+//    var approved: Bool
     
     init?(dict: NSDictionary){
         guard
@@ -37,6 +38,7 @@ class Disaster {
             let disRadius = dict["radius"] as? Int,
             let type = dict["type"] as? Int,
             let disLoc = dict["location"] as? String
+//            let isApproved = Bool((dict["approved"] as? String)!)
         else {
             return nil
         }
@@ -45,8 +47,8 @@ class Disaster {
         
         level = disLevel
         radius = disRadius
-        location = (0, 0)
-        
+//        approved = isApproved
+        location = (0,0)
         splitLocation(location: disLoc)
         self.disasterType = setTitleForType(type: type)
         
@@ -124,38 +126,38 @@ class Disaster {
 //        }
 //    }
     
-    func descriptionForType() -> String?{
-        if let unwarpTyped = disasterType {
-        switch unwarpTyped {
-            case .flood:
-                return "Attention! There is flooding in this region. Take action for immediate evacuation to a higher point."
-            case .fire:
-                return "Attention! There is fire in this area. Take action for immediate evacuation to a safe location .."
-            
-            case .attack:
-                return "Attention! There is a terrorist attack in this area. Take action for immediate evacuation to a safe location."
-            
-            case .gasLeak:
-                return "Attention! There is a gas leak in the area. Turn off the central electricity and stop the local gas supply. Take action for immediate evacuation to a safe location."
-            
-            case .chemicalRisk:
-                return "Attention! There is a chemical risk in this area. Take action for immediate evacuation to a safe location."
-            
-            case .earthquake:
-                return "Attention! An earthquake in this region. Turn off the central electricity and stop the local gas supply. Take action for immediate evacuation to a safe location. Use only stairs."
-            
-            case .hail:
-                return "Attention! There is a hail in this area. Take action for immediate evacuation to a safe location."
-            
-            case .landslide:
-                return "Attention! There is a landslide in this area. Take action for immediate evacuation to a safe location."
-            
-            case .radiationRisk:
-                return "Attention! There is a radiation risk in this area. Take action for immediate evacuation to a safe location."
-            }
-        }
-        return nil
-    }
+//    func descriptionForType() -> String?{
+//        if let unwarpTyped = disasterType {
+//        switch unwarpTyped {
+//            case .flood:
+//                return "Attention! There is flooding in this region. Take action for immediate evacuation to a higher point."
+//            case .fire:
+//                return "Attention! There is fire in this area. Take action for immediate evacuation to a safe location .."
+//            
+//            case .attack:
+//                return "Attention! There is a terrorist attack in this area. Take action for immediate evacuation to a safe location."
+//            
+//            case .gasLeak:
+//                return "Attention! There is a gas leak in the area. Turn off the central electricity and stop the local gas supply. Take action for immediate evacuation to a safe location."
+//            
+//            case .chemicalRisk:
+//                return "Attention! There is a chemical risk in this area. Take action for immediate evacuation to a safe location."
+//            
+//            case .earthquake:
+//                return "Attention! An earthquake in this region. Turn off the central electricity and stop the local gas supply. Take action for immediate evacuation to a safe location. Use only stairs."
+//            
+//            case .hail:
+//                return "Attention! There is a hail in this area. Take action for immediate evacuation to a safe location."
+//            
+//            case .landslide:
+//                return "Attention! There is a landslide in this area. Take action for immediate evacuation to a safe location."
+//            
+//            case .radiationRisk:
+//                return "Attention! There is a radiation risk in this area. Take action for immediate evacuation to a safe location."
+//            }
+//        }
+//        return nil
+//    }
     
     private func splitLocation(location: String){
         let charSet = CharacterSet(charactersIn: ", ()")

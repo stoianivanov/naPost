@@ -65,6 +65,7 @@ class DetailDisasterViewController: CustomVC, MKMapViewDelegate{
 
 
         self.view.addConstraintsWithFormat("H:|-8-[v0]-8-|", views: mapKit)
+
         self.view.addConstraintsWithFormat("V:|-72-[v0(50)]-[v1]-8-[v2]-8-|", views: disasterImageView, descriptionLabel, mapKit)
         self.view.addConstraint(NSLayoutConstraint(item: typeLabel, attribute: .centerY, relatedBy: .equal, toItem: disasterImageView, attribute: .centerY, multiplier: 1, constant: 0))
         self.view.addConstraint(NSLayoutConstraint(item: levelView, attribute: .centerY, relatedBy: .equal, toItem: disasterImageView, attribute: .centerY, multiplier: 1, constant: 0))
@@ -72,14 +73,12 @@ class DetailDisasterViewController: CustomVC, MKMapViewDelegate{
         levelView.heightAnchor.constraint(equalToConstant: 25).isActive = true
         levelView.widthAnchor.constraint(equalToConstant: 25).isActive = true
         
-//        self.view.addConstraint(NSLayoutConstraint(item: mapKit, attribute: .top, relatedBy: .equal, toItem: navBar, attribute: .bottom, multiplier: 1, constant: 0))
-//        self.view.addConstraint(NSLayoutConstraint(item: mapKit, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 8))
         fetchDisaster()
     }
     
     func fetchDisaster(){
         if currentDisaster != nil {
-//            self.title = "Details"
+            self.title = "Details"
             self.title = currentDisaster?.getTitleForType()
             let clLocation = CLLocationCoordinate2D(latitude: (currentDisaster?.location?.0)!, longitude: (currentDisaster?.location?.1)!)
             print(currentDisaster?.location)
@@ -126,4 +125,5 @@ class DetailDisasterViewController: CustomVC, MKMapViewDelegate{
             return "Radiationrisk"
         }
     }
+    
 }
