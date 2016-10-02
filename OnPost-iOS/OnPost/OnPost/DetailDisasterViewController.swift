@@ -57,7 +57,7 @@ class DetailDisasterViewController: CustomVC, MKMapViewDelegate{
     func fetchDisaster(){
         if currentDisaster != nil {
             self.title = currentDisaster?.getTitleForType()
-            let clLocation = CLLocationCoordinate2D(latitude: 46.7667, longitude: 23.58)
+            let clLocation = CLLocationCoordinate2D(latitude: (currentDisaster?.location?.0)!, longitude: (currentDisaster?.location?.1)!)
             print(currentDisaster?.location)
             
             descriptionLabel.text = currentDisaster?.descriptionText
@@ -69,5 +69,10 @@ class DetailDisasterViewController: CustomVC, MKMapViewDelegate{
     func centerMapOnLocation(location: CLLocationCoordinate2D) {
         let region = MKCoordinateRegionMakeWithDistance(location, 2000, 2000)
         mapKit.setRegion(region, animated: true)
+        let clLocation = CLLocationCoordinate2D(latitude: (currentDisaster?.location?.0)!, longitude: (currentDisaster?.location?.1)!)
+        let objectAnnotation = MKPointAnnotation()
+        objectAnnotation.coordinate = clLocation
+        objectAnnotation.title = currentDisaster?.getTitleForType()
+        mapKit.addAnnotation(objectAnnotation)
     }
 }
