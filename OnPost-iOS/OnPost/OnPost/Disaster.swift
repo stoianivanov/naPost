@@ -33,9 +33,9 @@ class Disaster {
     init?(dict: NSDictionary){
         guard
             let disasterDescription = dict["description"] as? String,
-            let disLevel = Int((dict["level"] as? String)!),
-            let disRadius = Int((dict["radius"] as? String)!),
-            let type = Int((dict["type"] as? String)!),
+            let disLevel = dict["level"] as? Int,
+            let disRadius = dict["radius"] as? Int,
+            let type = dict["type"] as? Int,
             let disLoc = dict["location"] as? String
         else {
             return nil

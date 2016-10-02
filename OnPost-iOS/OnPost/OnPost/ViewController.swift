@@ -9,12 +9,19 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CustomNavBarDelegate{
     
     let DISASTER_CELL = "DisasterCell"
     
     var disasters : [Disaster] = []
 
+    lazy var navBar: CustomNavigationBar = {
+        let nav = CustomNavigationBar()
+        nav.navBarDelegate = self
+        nav.translatesAutoresizingMaskIntoConstraints = false
+        return nav
+    }()
+    
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.rowHeight = UITableViewAutomaticDimension
@@ -31,8 +38,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view, typically from a nib.
         
         view.addSubview(tableView)
-        view.addConstraintsWithFormat("V:|-64-[v0]-49-|", views: tableView)
+//        view.addConstraintsWithFormat("V:|-64-[v0]-49-|", views: tableView)
         view.addConstraintsWithFormat("H:|[v0]|", views: tableView)
+        
+        view.addSubview(navBar)
+        view.addConstraintsWithFormat("V:|-20-[v0(44)][v1]|", views: navBar, tableView)
+        view.addConstraintsWithFormat("H:|[v0]|", views: navBar)
+        loadDisasters()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +52,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         navigationController?.title = "OnPost"
         
-        loadDisasters()
+//        loadDisasters()
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,8 +84,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let disaster = disasters[indexPath.item]
         let detailDisaster = DetailDisasterViewController()
         detailDisaster.currentDisaster = disaster
-        
-//        self.navigationItem.backBarButtonItem?.title = "Назад"
+
         navigationController?.pushViewController(detailDisaster, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -81,8 +92,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func loadDisasters(){
         FIRDatabase.database().reference().child("disasters").observe(.childAdded, with: {
-            (snapshot) in
-            
+                (snapshot) in
             if let dict = snapshot.value as? NSDictionary{
                 print(snapshot)
                 let newDisaster = Disaster(dict: dict)
@@ -96,6 +106,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 (error) in
                 print(error)
         })
+    }
+
+    func reportAction() {
+        let report = ReportVC()
+        navigationController?.pushViewController(report, animated: true)
     }
 }
 
